@@ -2,6 +2,10 @@ body {
     font-family: sans-serif;
     background-color: #f7f7f7;
 }
+.container {
+    max-width: 500px;
+    margin: auto;
+}
 table, .configurador {
     border: 1px solid #999;
     border-collapse: collapse;
