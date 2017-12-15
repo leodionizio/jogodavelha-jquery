@@ -6,7 +6,7 @@
         <script type="text/javascript"src="js/jquery-3.2.1.min.js"></script>
         
         <script type="text/javascript">
-        
+            var interval = null;
             $(document).ready(function(){
                 
 //                Validação do preenchimento
@@ -18,47 +18,130 @@
                     if(jogador1.trim().length > 0 && jogador2.trim().length > 0) {
                         iniciarJogo();
                     } else {
-                        alert('Jogadores não identificados!');
+                        $('.msg').text('Jogadores não identificados!');
                     }
                     
                 })
-                function iniciarJogo() {
-                    alert('Iniciou o jogo!');
-                    var contadorClicks = 0;
-                    
-                    $('table td').click(function() {
-                        contadorClicks ++;
-                        
-                        if( contadorClicks <= 9) {
-                            
-                            if( contadorClicks % 2 === 0 ) {
-                                // Par
-                                $(this).text('O');
-                            } else {
-                                // Impar
-                                $(this).text('X');
-                            }
-                            
-                            if(contadorClicks === 9) {
-                                $('#msg').text('Jogo Encerrado!');
-                            }
-                        } 
-                    })
-                }
-                
             })
+
+            // função para iniciar o jogo
+            function iniciarJogo() {
+                $('.msg').text('Jogo em andamento!');
+                var contadorClicks = 0;
+
+                interval = setInterval(tempoDecorrido, 1000);
+                
+                $('table td').click(function() {
+                    contadorClicks ++;
+
+                    if( contadorClicks <= 9) {
+
+                        if( contadorClicks % 2 === 0 ) {
+                            // Par
+                            $(this).text('O');
+                        } else {
+                            // Impar
+                            $(this).text('X');
+                        }
+
+                        if ( verificarGanhador() ) {
+                            contadorClicks = 9;
+                        }
+
+                         if(contadorClicks === 9) {
+                            $('.msg').append('<br />Jogo encerrado');
+                             clearInterval(interval);
+                        }
+                    } 
+                })
+            }
+
+            // função que verifica o ganhador
+            function verificarGanhador() {
+                var vencedor = [
+                    // linhas
+                    [0,1,2],
+                    [3,4,5],
+                    [6,7,8],
+
+                    // colunas
+                    [0,3,6],
+                    [1,4,7],
+                    [2,5,8],
+
+                    // diagonais
+                    [0,4,8],
+                    [6,4,2]
+                ];
+
+                var x = new Array(9);
+                var o = new Array(9);
+
+                $('table td').each(function(key) {
+                    if( $(this).text() === 'X' ) {
+                        x[key] = key;
+                    }
+
+                    if( $(this).text() === 'O' ) {
+                        o[key] = key;
+                    }
+                });
+                return definirGanhador(x, o, vencedor);
+            }
+            
+            // função que define o ganhador
+            function definirGanhador(x, o, vencedor) {
+                
+                // percorre as linhas
+                for(var i = 0; i< vencedor.length; i++) {
+                    var contadorX = 0;
+                    var contadorO = 0;
+
+                    // percorre as colunas de uma linha
+                    for(var j =0; j < vencedor[i].length; j++) {
+
+                        if(x[vencedor[i][j]] === vencedor[i][j]) {
+                            contadorX++;
+                        }
+
+                        if(o[vencedor[i][j]] === vencedor[i][j]) {
+                            contadorO++;
+                        }
+                        if(contadorX === 3) {
+                            $('.msg').text('X - ' + $('#jogador1').val() + ' é o vencedor!');
+                            return true;
+                        }
+                        if(contadorO === 3) {
+                            $('.msg').text('O - ' + $('#jogador2').val() + ' é o vencedor!');
+                            return true
+                        }
+                    }
+                }
+            }
+            
+            var inicioJogo = null;
+            
+            function tempoDecorrido() {
+                if(iniciarJogo === null) {
+                    inicioJogo = 1;
+                }
+
+                $('#tempo span').text(inicioJogo++);
+            }
+                
         
         </script>
     </head>
     <body>
         
         <div class="configurador">
-            
+            <div class="msg"></div>
             <span>X</span><input type="text" id="jogador1" name="jogador1" placeholder="Nome do jogador 1" />
             <strong>VS</strong>
             <input type="text" id="jogador2" name="jogador2" placeholder="Nome do jogador 2" /><span>O</span>
             <br /><br />
             <button id="btn-iniciar">Iniciar Jogo</button>
+            <div id="tempo"><span>0</span> segundos</div>
             <br />
             <div id="msg"></div>
         </div>

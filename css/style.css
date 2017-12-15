@@ -1,5 +1,6 @@
 body {
     font-family: sans-serif;
+    background-color: #f7f7f7;
 }
 table, .configurador {
     border: 1px solid #999;
@@ -25,7 +26,7 @@ table td {
     padding: 6px 10px;
     border: none;
     border-bottom: 1px solid #cecece;
-    width: 150px;
+    width: 183px;
 }
 input::placeholder {
     color: #999;
@@ -41,15 +42,34 @@ input:focus {
     background-color: #cecece;
 }
 .configurador button {
+    float: right;
     padding: 7px 15px;
     background-color: #cecece;
     border: none;
     cursor: pointer;
-    box-shadow: 1px 1px 2px #777;
+    margin-bottom: 10px;
 }
+
 button:focus {
     outline-color: transparent;
 }
 button:hover {
     background-color: #b3b3b3;
+}
+.msg {
+    width: 100%;
+    padding: 6px 0;
+    margin-bottom: 20px;
+    height: 35px;
+    border: 1px solid #999;
+    color: #888;
+}
+#tempo {
+    font-size: 18px;
+    padding: 7px;
+    color: #999;
+    float: left;
+}
+#tempo span {
+    background-color: transparent;
 }
