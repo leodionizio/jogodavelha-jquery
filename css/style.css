@@ -1,0 +1,55 @@
+body {
+    font-family: sans-serif;
+}
+table, .configurador {
+    border: 1px solid #999;
+    border-collapse: collapse;
+    width: 500px;
+    margin: auto;
+}
+table td {
+    border: 1px solid #999;
+    height: 150px;
+    width: 150px;
+    text-align: center;
+    font-size: 80px;
+    cursor: pointer;
+}
+.configurador {
+    text-align: center;
+    border: none;
+    margin: 15px auto;
+}
+.configurador input {
+    height: 18px;
+    padding: 6px 10px;
+    border: none;
+    border-bottom: 1px solid #cecece;
+    width: 150px;
+}
+input::placeholder {
+    color: #999;
+}
+input:focus {
+    outline-color: transparent;
+}
+.configurador span {
+    vertical-align: middle;
+    padding: 7px 10px;
+    font-weight: 700;
+    text-align: center;
+    background-color: #cecece;
+}
+.configurador button {
+    padding: 7px 15px;
+    background-color: #cecece;
+    border: none;
+    cursor: pointer;
+    box-shadow: 1px 1px 2px #777;
+}
+button:focus {
+    outline-color: transparent;
+}
+button:hover {
+    background-color: #b3b3b3;
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <title># Jogo da Velha</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <script type="text/javascript"src="js/jquery-3.2.1.min.js"></script>
+        
+        <script type="text/javascript">
+        
+            $(document).ready(function(){
+                
+//                Validação do preenchimento
+                $('#btn-iniciar').click(function() {
+                    var jogador1 = $('#jogador1').val();
+                    
+                    var jogador2 = $('#jogador2').val();
+                    
+                    if(jogador1.trim().length > 0 && jogador2.trim().length > 0) {
+                        iniciarJogo();
+                    } else {
+                        alert('Jogadores não identificados!');
+                    }
+                    
+                })
+                function iniciarJogo() {
+                    alert('Iniciou o jogo!');
+                    var contadorClicks = 0;
+                    
+                    $('table td').click(function() {
+                        contadorClicks ++;
+                        
+                        if( contadorClicks <= 9) {
+                            
+                            if( contadorClicks % 2 === 0 ) {
+                                // Par
+                                $(this).text('O');
+                            } else {
+                                // Impar
+                                $(this).text('X');
+                            }
+                            
+                            if(contadorClicks === 9) {
+                                $('#msg').text('Jogo Encerrado!');
+                            }
+                        } 
+                    })
+                }
+                
+            })
+        
+        </script>
+    </head>
+    <body>
+        
+        <div class="configurador">
+            
+            <span>X</span><input type="text" id="jogador1" name="jogador1" placeholder="Nome do jogador 1" />
+            <strong>VS</strong>
+            <input type="text" id="jogador2" name="jogador2" placeholder="Nome do jogador 2" /><span>O</span>
+            <br /><br />
+            <button id="btn-iniciar">Iniciar Jogo</button>
+            <br />
+            <div id="msg"></div>
+        </div>
+        
+        <table>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </body>
+</html>
